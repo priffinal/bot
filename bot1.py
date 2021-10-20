@@ -74,11 +74,20 @@ async def tkb(ctx, *, x):
     await ctx.send(f'{ctx.message.author.mention} \n```T2: CC, GDCD, CN, Sinh, Toán \nT3: Anh, Toán, Địa, Hóa \nT4: TD, Văn, Văn, Toán \nT5: Anh, Lý, Lý, Sử \nT6: Anh, Văn, Văn, TD \nT7: Tin, Địa, Hóa, Lý, SH```')
 @MusicManager.event
 async def on_play(ctx, player):
-    await ctx.send(f"Đang phát bài: {player.title}")
+    await ctx.send(f"Bắt đầu phát : {player.title}")
 @bot.command()
 async def leave(ctx):
     if await MusicManager.leave(ctx):
         await ctx.send("Sao m lại đuổi t đi?")
+
+@bot.command()
+async def np(ctx):
+    if player := await MusicManager.now_playing(ctx):
+        await ctx.send(f"Đang phát bài: {player}")
+@bot.command()
+async def join(ctx):
+    if await MusicManager.join(ctx):
+        await ctx.send("Vào VC r đấy thg ngu!")
 @bot.command()
 async def play(ctx, *, query: str):
     player = await MusicManager.create_player(query)
