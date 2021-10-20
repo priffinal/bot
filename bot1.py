@@ -12,7 +12,7 @@ status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
 # Ready
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity = discord.Game('sus'), status = discord.Status.do_not_disturb, )
+    await bot.change_presence(activity = discord.Game('sus'), status = discord.Status.do_not_disturb)
     change_status.start()
     print('Bot is ready.')
 
