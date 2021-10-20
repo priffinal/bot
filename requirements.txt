@@ -1,3 +1,4 @@
 discord.py
 youtube-dl
+dismusic
 python-dotenv
