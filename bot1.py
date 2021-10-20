@@ -3,8 +3,15 @@ from discord import member
 from discord.ext import commands, tasks
 from itertools import cycle
 import youtube_dl
+import music
+
+cogs = [music]
 
 bot = commands.Bot(command_prefix = '.')
+
+for i in range(len(cogs)):
+    cogs[i].setup(bot)
+
 status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
 # Ready
 @bot.event
