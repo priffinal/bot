@@ -3,14 +3,8 @@ from discord import member
 from discord.ext import commands, tasks
 from itertools import cycle
 import youtube_dl
-import music
-
-cogs = [music]
 
 bot = commands.Bot(command_prefix = '.')
-
-for i in range(len(cogs)):
-    cogs[i].setup(bot)
 
 status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
 # Ready
@@ -19,6 +13,8 @@ async def on_ready():
     await bot.change_presence(activity = discord.Game('sus'), status = discord.Status.do_not_disturb, )
     change_status.start()
     print('Bot is ready.')
+
+bot.load_extension('dismusic')
 # Member join
 @bot.event
 async def on_member_join(member):
