@@ -2,6 +2,7 @@ import discord, random, asyncio
 from discord import member
 from discord.ext import commands, tasks
 from itertools import cycle
+import youtube_dl
 
 bot = commands.Bot(command_prefix = '.')
 status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
