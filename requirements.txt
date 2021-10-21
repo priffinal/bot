@@ -1,5 +1,6 @@
 discord.py
 youtube-dl
 dismusic
+pynacl
 discordSuperUtils
 python-dotenv
