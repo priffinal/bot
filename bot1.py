@@ -77,4 +77,4 @@ bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
     else:
         await ctx.send('Đưa cái địa chỉ lớp đây rồi nói tiếp')
 
-bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
+bot.run('NzU5Mzk2MDQ4NzcwMTcwODgw.X284rg.ObXH7FWd7DNS_i0k6AuM9nyTmWw')
