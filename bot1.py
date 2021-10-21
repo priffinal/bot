@@ -4,6 +4,7 @@ from discord.ext import commands, tasks
 from itertools import cycle
 import youtube_dl
 from discordSuperUtils import MusicManager
+import music
 
 bot = commands.Bot(command_prefix = '.')
 
