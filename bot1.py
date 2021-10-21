@@ -6,7 +6,7 @@ import youtube_dl
 from discordSuperUtils import MusicManager
 
 bot = commands.Bot(command_prefix = '.')
-MusicManager = MusicManager(bot)
+
 
 status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
 # Ready
@@ -75,34 +75,5 @@ async def tkb(ctx, *, x):
 @MusicManager.event
 async def on_play(ctx, player):
     await ctx.send(f"Bắt đầu phát : {player.title}")
-@bot.command()
-async def leave(ctx):
-    if await MusicManager.leave(ctx):
-        await ctx.send("Sao m lại đuổi t đi?")
 
-@bot.command()
-async def np(ctx):
-    if player := await MusicManager.now_playing(ctx):
-        await ctx.send(f"Đang phát bài: {player}")
-@bot.command()
-async def join(ctx):
-    if await MusicManager.join(ctx):
-        await ctx.send("Vào VC r đấy thg ngu!")
-@bot.command()
-async def play(ctx, *, query: str):
-    player = await MusicManager.create_player(query)
-    await MusicManager.queue_add(player=player, ctx=ctx)
-
-    if not await MusicManager.play(ctx):
-        await ctx.send("Added to queue")
-@bot.command()
-async def volume(ctx, volume: int):
-    await MusicManager.volume(ctx, volume)
-@bot.command()
-async def loop(ctx):
-    is_loop = await MusicManager.loop(ctx)
-    await ctx.send(f"Đang lặp lại bài: {is_loop}")
-@bot.command()
-async def stop(ctx):
-    ctx.voice_client.stop()
 bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
