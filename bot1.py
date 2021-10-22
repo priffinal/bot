@@ -76,6 +76,6 @@ async def tkb(ctx, *, x):
 
 @bot.command()
 async def spam(ctx, sus, x):
-    for i in range(1, x+1):
+    for i in range(x):
         await ctx.send(sus)
 bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
