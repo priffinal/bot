@@ -65,7 +65,7 @@ async def change_status():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Biết dùng bàn phím ko?')
+        await ctx.send('Gõ thiếu r thg ngu!')
     if isinstance(error, commands.CommandNotFound):
         await ctx.send('Biết dùng bot ko?')
 # TKB
