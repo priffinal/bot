@@ -74,4 +74,8 @@ async def on_command_error(ctx, error):
 async def tkb(ctx, *, x):
     await ctx.send(f'{ctx.message.author.mention} \n```T2: CC, GDCD, CN, Sinh, Toán \nT3: Anh, Toán, Địa, Hóa \nT4: TD, Văn, Văn, Toán \nT5: Anh, Lý, Lý, Sử \nT6: Anh, Văn, Văn, TD \nT7: Tin, Địa, Hóa, Lý, SH```')
 
+@bot.command()
+async def spam(ctx, sus, x):
+    for i in x:
+        await ctx.send(sus)
 bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
