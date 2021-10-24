@@ -1,21 +1,25 @@
-import discord, random, asyncio
+import discord, random, asyncio, os
 from discord import member
 from discord.ext import commands, tasks
 from itertools import cycle
-import music
 import keep_alive
+import music
 
 bot = commands.Bot(command_prefix = '.')
 
-roles = ctx.get()
+cogs = [music]
+
+for i in range(len(cogs)):
+  cogs[i].setup(bot)
 
 status = cycle(['Never', 'Gonna', 'Give', 'You', 'Up'])
+
 # Ready
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity = discord.Game('sus'), status = discord.Status.do_not_disturb)
-    change_status.start()
-    print('Bot is ready.')
+  await bot.change_presence(status=discord.Status.do_not_disturb)
+  change_status.start()
+  print('Bot is ready.')
 
 # Member join
 @bot.event
@@ -32,20 +36,24 @@ async def _8ball(ctx, *, question):
     await ctx.send(f':8ball: {random.choice(responses)}')
 # Clear
 @bot.command(name='clear', help='Xóa tin nhắn.')
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount : int):
-    await ctx.channel.purge(limit=amount+1)
+  await ctx.channel.purge(limit=amount+1)
 # Kick
 @bot.command(name='kick', help='Đá mẹ khỏi server luôn!')
-async def kick(ctx, member : discord.Member, *, reason=None):
+@commands.has_permissions(kick_members=True, ban_members=True)
+async def kick(ctx, member : discord.Member, *, reason):
     await member.kick(reason=reason)
     await ctx.send(f'Đã kick {member.mention}')
 # Ban
 @bot.command(name='ban', help='Khi tôi không muốn gặp lại bạn.')
-async def ban(ctx, member : discord.Member, *, reason=None):
+@commands.has_permissons(kick_members=True, ban_members=True)
+async def ban(ctx, member : discord.Member, *, reason):
     await member.ban(reason=reason)
     await ctx.send(f'Đã ban {member.mention}')
 # Unban
 @bot.command(name='unban', help='Khi tôi lại muốn gặp lại bạn.')
+@commands.has_permissions(kick_members=True, ban_members=True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
     member_name, member_discrim = member.split('#')
@@ -60,14 +68,14 @@ async def unban(ctx, *, member):
 #Status
 @tasks.loop(seconds=10)
 async def change_status():
-    await bot.change_presence(activity=discord.Game(next(status)))
+    await bot.change_presence(activity=discord.Game(name=next(status)), status=discord.Status.do_not_disturb)
 # Error
 @bot.event
 async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Gõ thiếu r thg ngu!')
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.send('Biết dùng bot ko?')
+  if isinstance(error, commands.MissingRequiredArgument):
+    await ctx.send('Gõ thiếu r thg ngu!')
+  if isinstance(error, commands.CommandNotFound):
+    await ctx.send('Biết dùng bot ko?') 
 # TKB
 @bot.command(name='tkb', help='Thời khóa biểu')
 async def tkb(ctx):
@@ -75,8 +83,11 @@ async def tkb(ctx):
 # Spam
 @bot.command(name='spam', help='Khi bạn gọi thằng Hoàng nhưng nó đêll thèm rep.')
 async def spam(ctx, x:int, *, message):
-    for i in range(x):
+    if x <= 20:
+      for i in range(1, x+1):
         await ctx.send(message)
+    else:
+      await ctx.send('Mẹ thíck spam ko thg rẻ rách này!')
 # Ping
 @bot.command(name='ping', help='Khi bạn thấy mạng lag qué.')
 async def ping(ctx):
@@ -88,4 +99,6 @@ async def roles(ctx):
 
 keep_alive.keep_alive()
 
-bot.run('ODU3OTY0MTQ3NDIwNTYxNDI5.YNXPYA.Gezqr_2GF4SU60LIaOsSl_2NpP4')
+token = os.environ['YOUR_TOKEN']
+
+bot.run(token)
