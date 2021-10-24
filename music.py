@@ -18,7 +18,7 @@ class music(commands.Cog):
     async def disconnect(self, ctx):
         await ctx.voice_channel.disconnect()
     @commands.command
-    async def join(self, ctx, url):
+    async def play(self, ctx, url):
         ctx.voice_channel.stop()
         FFMPEG_OPTIONS = {'before connect': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
         YDL_OPTIONS = {'format':"bestaudio"}
